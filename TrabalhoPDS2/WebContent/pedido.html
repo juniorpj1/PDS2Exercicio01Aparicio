@@ -41,7 +41,7 @@
 							<div class="form-group">
 								<div class="col-sm-2 control-label">
 									<label class="col-sm-2 control-label" for="exampleInputData">Data</label>
-									<input type="text" class="form-control" ng-model="pedido.data"
+									<input type="text" class="form-control" ng-model="pedido.data "
 										placeholder="Data">
 								</div>
 							</div>
@@ -63,10 +63,10 @@
 
 							<th>Data</th>
 
-							<tr ng-repeat="pedidoTabela in pedidos | filter:criterio"
+							<tr ng-repeat="pedidoTabela in pedidos | filter:criterio "
 								ng-click="seleciona(pedidoTabela);">
 								<td>{{pedidoTabela.codPedido}}</td>
-								<td>{{pedidoTabela.data}}</td>
+								<td>{{pedidoTabela.data | date:'d/M/yyyy'}}</td>
 							</tr>
 						</table>
 					</div>
