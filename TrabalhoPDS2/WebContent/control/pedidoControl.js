@@ -34,7 +34,7 @@ app.controller('pedidoControl',function($scope,$http){
 		if ($scope.pedido.codPedido == '') {
 			alert("Selecione um pedido");
 		} else {
-			urlExcluir = url + "/" + $scope.pedido.codPedido;
+			urlExcluir = url + '/' + $scope.pedido.codPedido;
 			$http.delete(urlExcluir).success(function () {
 				$scope.pesquisar();
 				$scope.novo();
@@ -46,12 +46,12 @@ app.controller('pedidoControl',function($scope,$http){
 		$scope.novo();
 	}
 	
-	$scope.seleciona = function(pedidoTabela) {
-		$scope.pedido = pedidoTabela;
+	$scope.novo = function(){
+		$scope.pedido = "";
 	}
 	
-	$scope.novo = function(){
-		$scope.pedido == '';
+	$scope.seleciona = function(pedidoTabela) {
+		$scope.pedido = pedidoTabela;
 	}
 	
 	$scope.pesquisar();
