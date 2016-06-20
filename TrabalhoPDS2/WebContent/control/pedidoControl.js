@@ -1,5 +1,5 @@
 var app = angular.module('pedidoModule',[]);
-
+ 
 app.controller('pedidoControl',function($scope,$http){
 	
 	var url = 'http://localhost:8080/TrabalhoPDS2/rs/pedido';
@@ -12,20 +12,36 @@ app.controller('pedidoControl',function($scope,$http){
 		});   
 	}
 	
+	$scope.pesquisar();
+	
+	$scope.novo = function(){
+		$scope.pedido = {};
+	}
+	
+	$scope.montaMensagemErro = function(listaErro) {
+		$scope.mensagens = [];
+		angular.forEach(listaErro, function(value, key){
+			 $scope.mensagens.push(value.message);
+		});
+	}
+	
     $scope.salvar = function() {
-		if ($scope.pedido.codPedido == '') {
+		if ($scope.pedido.codPedido == '' || $scope.pedido.codPedido == undefined) {
 			$http.post(url, $scope.pedido).success(function(pedido) {
 				$scope.pedidos.push($scope.pedido);
 				$scope.novo();
+				$scope.mensagens.push('Pedido salvo com sucesso!');
 			}).error(function (erro) {
-				alert(erro);
+				// alert(erro);
+				$scope.montaMensagemErro(erro.parameterViolations);
 			});
 		} else {
 			$http.put(url,$scope.pedido).success(function(pedido) {
 				$scope.pesquisar();
 				$scope.novo();
+				$scope.mensagens.push('Pedido atualizado com sucesso!');
 			}).error(function (erro) {
-				alert(erro);
+				$scope.montaMensagemErro(erro.parameterViolations);
 			});
 		}		
 	}
@@ -38,22 +54,18 @@ app.controller('pedidoControl',function($scope,$http){
 			$http.delete(urlExcluir).success(function () {
 				$scope.pesquisar();
 				$scope.novo();
+				$scope.mensagens.push('Pedido excluído com sucesso!');
 			}).error(function (erro) {
-				alert(erro);
+				//alert(erro);
+				$scope.mensagens.push('Erro ao excluir cliente: '+erro);
 			});
 		}
 		$scope.pedidos.splice($scope.pedidos.indexOf($scope.pedido), 1);
 		$scope.novo();
 	}
 	
-	$scope.novo = function(){
-		$scope.pedido = "";
-	}
-	
 	$scope.seleciona = function(pedidoTabela) {
 		$scope.pedido = pedidoTabela;
 	}
-	
-	$scope.pesquisar();
 	
 });

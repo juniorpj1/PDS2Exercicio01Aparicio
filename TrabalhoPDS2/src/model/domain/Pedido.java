@@ -43,7 +43,6 @@ public class Pedido implements Serializable {
 		itens = new ArrayList<>();
 	}
 
-	
 	public Integer getCodPedido() {
 		return codPedido;
 	}
