@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="produtoModule">
 <head>
-<meta-charset="utf-8">
-<title>produto</title>
+<meta-charset="UTF-8" ->
+<title>Produto</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <script src="js/angular.min.js"></script> <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script> <script
@@ -25,9 +25,12 @@
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="cadastro">
-						<br>
-
+						<br> 
 						
+						<span ng-repeat="mensagem in mensagens">{{mensagem}}<br></span>
+						
+						<br>
+					
 						<form class="form-horizontal">
 							<div class="form-group">
 								<div class="col-sm-2 control-label">
@@ -54,8 +57,10 @@
 							</div>
 							<hr />
 							<button type="button" class="btn btn-info" ng-click="novo();">Novo</button>
-  							<button type="submit" class="btn btn-default" ng-click="salvar();">Salvar</button>
-  							<button type="button" class="btn btn-danger" ng-click="excluir();">Excluir</button>
+							<button type="submit" class="btn btn-default"
+								ng-click="salvar();">Salvar</button>
+							<button type="button" class="btn btn-danger"
+								ng-click="excluir();">Excluir</button>
 
 						</form>
 					</div>

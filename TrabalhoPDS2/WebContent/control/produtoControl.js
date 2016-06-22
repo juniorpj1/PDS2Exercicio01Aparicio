@@ -8,24 +8,41 @@ app.controller('produtoControl', function($scope,$http){
 		$http.get(url).success(function (produtosRetorno) {
 			$scope.produtos = produtosRetorno;
 		}).error(function(mensagemErro) {
-			alert(mensagemErro);
+			$scope.mensagens.push('Erro ao pesquisar produtos '+mensagemErro);
 		});   
 	}
 	
+	$scope.pesquisar();
+	
+	$scope.novo = function(){
+		$scope.produto = {};
+		$scope.mensagens = [];
+	}
+	
+	$scope.montaMensagemErro = function(listaErro) {
+		$scope.mensagens = [];
+		angular.forEach(listaErro, function(value, key){
+			 $scope.mensagens.push(value.message);
+		});
+	}
+	
     $scope.salvar = function() {
-		if ($scope.produto.codigo == '') {
+		if ($scope.produto.codProduto == undefined || $scope.produto.codProduto == '') {
 			$http.post(url, $scope.produto).success(function(produto) {
 				$scope.produtos.push($scope.produto);
 				$scope.novo();
+				$scope.mensagens.push('Produto salvo com sucesso!!!');
 			}).error(function (erro) {
-				alert(erro);
+				//alert(erro);
+				$scope.montaMensagemErro(erro.parameterViolations);
 			});
 		} else {
 			$http.put(url,$scope.produto).success(function(produto) {
 				$scope.pesquisar();
 				$scope.novo();
+				$scope.mensagens.push('Produto atualizado com sucesso!!!');
 			}).error(function (erro) {
-				alert(erro);
+				$scope.montaMensagemErro(erro.parameterViolations);
 			});
 		}		
 	}
@@ -38,22 +55,15 @@ app.controller('produtoControl', function($scope,$http){
 			$http.delete(urlExcluir).success(function () {
 				$scope.pesquisar();
 				$scope.novo();
+				$scope.mensagens.push('Produto excluído com sucesso');
 			}).error(function (erro) {
-				alert(erro);
+				$scope.mensagens.push('Erro ao excluir cliente: '+erro);
 			});
 		}
-		$scope.produtos.splice($scope.produtos.indexOf($scope.produto), 1);
-		$scope.novo();
 	}
 	
 	$scope.seleciona = function(produtoTabela) {
 		$scope.produto = produtoTabela;
 	}
-	
-	$scope.novo = function(){
-		$scope.produto == '';
-	}
-	
-	$scope.pesquisar();
 
 });
