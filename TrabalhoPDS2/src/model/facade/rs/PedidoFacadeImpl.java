@@ -1,7 +1,6 @@
 package model.facade.rs;
 
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
@@ -26,7 +25,7 @@ public class PedidoFacadeImpl implements PedidoFacade {
 
 	@Inject
 	private PedidoDao PedidoDao;
-	
+
 	@Override
 	@GET
 	public List<Pedido> getPedidos() {
@@ -41,18 +40,17 @@ public class PedidoFacadeImpl implements PedidoFacade {
 		Pedido.setCodPedido(codigo);
 		return PedidoDao.getPedidos(Pedido);
 	}
-	
 
 	@Override
-	@POST 
-	public Pedido salvar(Pedido Pedido) { 
+	@POST
+	public Pedido salvar(Pedido Pedido) {
 		Pedido = PedidoDao.salvar(Pedido);
-	 	return Pedido;
+		return Pedido;
 	}
-	
+
 	@Override
-	@PUT 
-	public void atualizar(Pedido Pedido) { 
+	@PUT
+	public void atualizar(Pedido Pedido) {
 		PedidoDao.atualizar(Pedido);
 	}
 

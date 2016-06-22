@@ -2,6 +2,9 @@ package model.facade;
 
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.executable.ValidateOnExecution;
+
 import model.domain.Produto;
 
 public interface ProdutoFacade {
@@ -10,9 +13,11 @@ public interface ProdutoFacade {
 
 	List<Produto> getProdutos(Integer codigo);
 
-	Produto salvar(Produto produto);
+	@ValidateOnExecution
+	Produto salvar(@Valid Produto produto);
 
-	void atualizar(Produto produto);
+	@ValidateOnExecution
+	void atualizar(@Valid Produto produto);
 
 	void deletarProduto(Integer codigo);
 

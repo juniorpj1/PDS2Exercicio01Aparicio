@@ -1,6 +1,6 @@
 var app = angular.module('produtoModule',[]);
 
-app.controller('produtoControl',function($scope,$http){
+app.controller('produtoControl', function($scope,$http){
 	
 	var url = 'http://localhost:8080/TrabalhoPDS2/rs/produto';
 	

@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -26,8 +29,12 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codProduto;
 	
+	@NotNull(message="O campo nome é obrigatório")
+	@Size(min=2, max=99,message="Nome do produto precisa ter pelo menos 2 caracteres e no máximo 99")
 	private String nome;
 	
+	@NotNull(message="O campo preco é obrigatório")
+	@DecimalMin("0")
 	private BigDecimal preco;
 	
 	//@Basic(fetch = FetchType.LAZY)

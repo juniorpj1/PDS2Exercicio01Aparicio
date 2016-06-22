@@ -2,6 +2,9 @@ package model.facade;
 
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.executable.ValidateOnExecution;
+
 import model.domain.Pedido;
 
 public interface PedidoFacade {
@@ -10,9 +13,11 @@ public interface PedidoFacade {
 
 	List<Pedido> getPedidos(Integer codigo);
 
-	Pedido salvar(Pedido Pedido);
+	@ValidateOnExecution
+	Pedido salvar(@Valid Pedido Pedido);
 
-	void atualizar(Pedido Pedido);
+	@ValidateOnExecution
+	void atualizar(@Valid Pedido Pedido);
 
 	void deletarPedido(Integer codigo);
 

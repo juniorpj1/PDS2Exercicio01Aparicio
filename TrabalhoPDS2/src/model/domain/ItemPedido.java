@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -24,6 +26,8 @@ public class ItemPedido implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codItemPedido;
 
+	@NotNull(message="O campo quantidade é obrigatório")
+	@Size(min=1, message="A quantidade precisa ser no mínimo 1")
 	private Integer quantidade;
 
 	@ManyToOne

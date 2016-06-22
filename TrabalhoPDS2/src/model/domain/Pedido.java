@@ -1,10 +1,10 @@
-	package model.domain;
+package model.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -21,13 +23,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name="tb_pedidos")
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codPedido;
 	
+	@NotNull(message="O campo data é obrigatório")
+	@Future
 	private Date data;
-	
+		
 	//@Basic(fetch = FetchType.LAZY)
 	@OneToMany(mappedBy="pedido")
 	private List<ItemPedido> itens;
@@ -36,9 +40,9 @@ public class Pedido implements Serializable {
 		itens = new ArrayList<>();
 	}
 
-	public Pedido(Integer codPedido, Date data) {
+	public Pedido(Integer codPedido, Date data) throws ParseException {
 		super();
-		this.codPedido = codPedido;
+		this.codPedido = codPedido; 
 		this.data = data;
 		itens = new ArrayList<>();
 	}

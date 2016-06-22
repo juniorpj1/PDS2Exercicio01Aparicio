@@ -1,8 +1,13 @@
 var app = angular.module('pedidoModule',[]);
  
-app.controller('pedidoControl',function($scope,$http){
+app.controller('pedidoControl', function($scope,$http){
 	
 	var url = 'http://localhost:8080/TrabalhoPDS2/rs/pedido';
+		
+	  $scope.closeAlert = function(pedido) {
+		$scope.alerts = [];
+	    $scope.alerts.splice(pedido, 1);
+	  };
 	
 	$scope.pesquisar = function(){
 		$http.get(url).success(function (pedidosRetorno) {
@@ -31,6 +36,7 @@ app.controller('pedidoControl',function($scope,$http){
 				$scope.pedidos.push($scope.pedido);
 				$scope.novo();
 				$scope.mensagens.push('Pedido salvo com sucesso!');
+				$scope.$parent.alerts.push({type: 'success', msg: 'Saved!'});
 			}).error(function (erro) {
 				// alert(erro);
 				$scope.montaMensagemErro(erro.parameterViolations);
@@ -40,8 +46,10 @@ app.controller('pedidoControl',function($scope,$http){
 				$scope.pesquisar();
 				$scope.novo();
 				$scope.mensagens.push('Pedido atualizado com sucesso!');
+				$scope.$parent.alerts.push({type: 'success', msg: 'Updated!'});
 			}).error(function (erro) {
 				$scope.montaMensagemErro(erro.parameterViolations);
+				$scope.$parent.alerts.push({type: 'danger', msg: 'Server: '+error.statusText});
 			});
 		}		
 	}
