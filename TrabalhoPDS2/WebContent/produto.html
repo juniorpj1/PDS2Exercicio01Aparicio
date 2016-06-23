@@ -25,17 +25,29 @@
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="cadastro">
+					<form name="form" class="form-horizontal" ng-submit="form.$valid && salvar()" novalidate>
 						<br> 
 						
-						<span ng-repeat="mensagem in mensagens">{{mensagem}}<br></span>
-						
+						<br> <span ng-repeat="mensagem in mensagens">{{mensagem}}<br></span>
+							
+							<div ng-show="form.$submitted">
+								
+								<div ng-show="form.nome.$error.required">O campo de nome é
+									obrigatório</div>
+								<div ng-show="form.nome.$error.minlength">A nome precisa
+									ter no mínimo 2 caracteres</div>
+									
+								<div ng-show="form.preco.$error.required">O campo de preco é
+									obrigatório</div>
+								<div ng-show="form.preco.$error.min">A preco precisa
+									ter o valor de pelo menos 1 centavo</div>
+							</div>
+							<br>
 						<br>
-					
-						<form class="form-horizontal">
 							<div class="form-group">
 								<div class="col-sm-2 control-label">
 									<label class="col-sm-2 control-label" for="exampleInputCodigo">Código</label>
-									<input type="number" disabled="true" class="form-control"
+									<input type="number" disabled="true" class="form-control" name="codigo"
 										ng-model="produto.codProduto" placeholder="Codigo">
 								</div>
 							</div>
@@ -43,24 +55,22 @@
 							<div class="form-group">
 								<div class="col-sm-2 control-label">
 									<label class="col-sm-2 control-label" for="exampleInputNome">Nome</label>
-									<input type="text" class="form-control" ng-model="produto.nome"
-										placeholder="Nome">
+									<input type="text" name="nome" class="form-control" ng-model="produto.nome"
+										placeholder="Nome" required>
 								</div>
 							</div>
 							<hr />
 							<div class="form-group">
 								<div class="col-sm-2 control-label">
 									<label class="col-sm-2 control-label" for="exampleInputPreco">Preço</label>
-									<input type="text" class="form-control"
-										ng-model="produto.preco" placeholder="Preço">
+									<input type="text" class="form-control" name="preco"
+										ng-model="produto.preco" placeholder="Preço" required>
 								</div>
 							</div>
 							<hr />
-							<button type="button" class="btn btn-info" ng-click="novo();">Novo</button>
-							<button type="submit" class="btn btn-default"
-								ng-click="salvar();">Salvar</button>
-							<button type="button" class="btn btn-danger"
-								ng-click="excluir();">Excluir</button>
+							<button type="button" class="btn btn-info" ng-click="novo()">Novo</button>
+							<button type="submit" class="btn btn-default">Salvar</button>
+							<button type="button" class="btn btn-danger" ng-click="excluir()">Excluir</button>
 
 						</form>
 					</div>

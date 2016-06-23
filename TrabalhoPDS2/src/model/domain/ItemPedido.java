@@ -27,7 +27,7 @@ public class ItemPedido implements Serializable {
 	private Integer codItemPedido;
 
 	@NotNull(message="O campo quantidade é obrigatório")
-	@Size(min=1, message="A quantidade precisa ser no mínimo 1")
+	@Size(min=1, message="A quantidade precisa ser maior que zero")
 	private Integer quantidade;
 
 	@ManyToOne

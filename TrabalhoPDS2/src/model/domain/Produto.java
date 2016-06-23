@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -34,7 +35,7 @@ public class Produto implements Serializable {
 	private String nome;
 	
 	@NotNull(message="O campo preco é obrigatório")
-	@DecimalMin("0")
+	@DecimalMin("0.01")
 	private BigDecimal preco;
 	
 	//@Basic(fetch = FetchType.LAZY)
