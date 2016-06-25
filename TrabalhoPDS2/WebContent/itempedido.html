@@ -28,13 +28,23 @@
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="cadastro">
 						<br>
-						
-						<form class="form-horizontal">
+						<form class="form-horizontal" name="form"
+							ng-submit="form.$valid && salvar()" novalidate>
+
+							<span ng-repeat="mensagem in mensagens">{{mensagem}}<br></span>
+
+							<div ng-show="form.$submitted">
+								<div ng-show="form.quantidade.$error.required">O campo de quantidade é
+									obrigatório</div>
+								<div ng-show="form.quantidade.$error.min">A quantidade precisa
+									ser maior que 0</div>
+							</div>
+							<br> <br>
 						<div class="form-group">
 							<div class="col-sm-2 control-label">
 							
 								<label class="col-sm-2 control-label" for="exampleInputCodigo">Código</label> 
-								<input type="code" disabled="true" class="form-control" 
+								<input type="number" disabled="true" class="form-control" name="codItemPedido"
 								ng-model="ItemPedido.codItemPedido" placeholder="Codigo">
 							</div>
 							</div>
@@ -43,8 +53,8 @@
 							<div class="form-group">
 							<div class="col-sm-2 control-label">
 								<label class="col-sm-2 control-label" for="exampleInputQuantidade">Quantidade</label> <input
-									type="text" class="form-control"
-									ng-model="ItemPedido.quantidade" placeholder="Quantidade">
+									type="text" class="form-control" name="quantidade"
+									ng-model="ItemPedido.quantidade" min="0" ng-min="" placeholder="Quantidade" required>
 							</div>
 							</div>
 							<hr/>
@@ -75,13 +85,15 @@
 						  </div>
 						  </div> 
 						  
+						  	<hr />
+						   <button type="button" class="btn btn-info" ng-click="novo()">Novo</button>
+ 						 <button type="submit" class="btn btn-default">Salvar</button>
+  						<button type="button" class="btn btn-danger" ng-click="excluir()">Excluir</button>
 						 
 							
 						</form>
-						<hr />
-						 <button type="button" class="btn btn-info" ng-click="novo();">Novo</button>
- 						 <button type="submit" class="btn btn-default" ng-click="salvar();">Salvar</button>
-  						<button type="button" class="btn btn-danger" ng-click="excluir();">Excluir</button>
+					
+						
 					</div>
 					<div role="tabpanel" class="tab-pane" id="dados">
 						<br> 

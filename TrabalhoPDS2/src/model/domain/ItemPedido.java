@@ -2,7 +2,6 @@
 package model.domain;
 
 import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -27,7 +26,7 @@ public class ItemPedido implements Serializable {
 	private Integer codItemPedido;
 
 	@NotNull(message="O campo quantidade é obrigatório")
-	@Size(min=1, message="A quantidade precisa ser maior que zero")
+	@Min(value=1, message="O campo quantidade deve ser maior ou igual a 1")
 	private Integer quantidade;
 
 	@ManyToOne
